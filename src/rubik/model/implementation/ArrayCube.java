@@ -35,7 +35,59 @@ public class ArrayCube extends Cube implements Movable {
 		
 		Neighbor.init(x, sizeOuterLayer(x));
 	}
-	
+
+	//Gets  string representation of the state of the cube and transforms it to the Array representation
+	public void randomCube(String r){
+		char[] colors = r.toCharArray();
+		int position = -1;
+		int piece = 0;
+
+		for(int i = 0; i<colors.length;i++){
+			if(i%9 == 0){
+				position++;
+				piece = 0;
+			}
+
+			switch (colors[i]) {
+				case 'W':
+					fillOneColor(Color.WHITE, position, piece);
+					break;
+				case 'R':
+					fillOneColor(Color.RED, position, piece);
+					break;
+				case 'G':
+					fillOneColor(Color.GREEN, position, piece);
+					break;
+				case 'O':
+					fillOneColor(Color.ORANGE, position, piece);
+					break;
+				case 'B':
+					fillOneColor(Color.BLUE, position, piece);
+					break;
+				case 'Y':
+					fillOneColor(Color.YELLOW, position, piece);
+					break;
+			}
+
+			piece++;
+
+		}
+
+
+	}
+
+	@Override
+	public String transferState() {
+		String representation = "";
+		for(Piece[] position : cube){
+			for (Piece piece : position){
+				representation = representation + piece.toString();
+			}
+		}
+		return representation;
+	}
+
+
 	private void fillColor (Color color, int position) {
 		
 		if (position >= 6) {
